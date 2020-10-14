@@ -2,54 +2,67 @@
 <html lang="en">
   <head>
     <title>Web OTP API Simplest</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>div {font-family: sans-serif;}</style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      div {
+        font-family: sans-serif;
+      }
+    </style>
   </head>
   <body>
-    <h1>
-      The simplest Web OTP API demo
-    </h1>
+    <h1>The simplest Web OTP API demo</h1>
     <div>
-      Send an SMS that includes <pre><code>@web-otp.glitch.me #12345</code></pre> to this phone.
+      Send an SMS that includes
+      <pre><code>@web-otp.glitch.me #12345</code></pre>
+      to this phone.
     </div>
-    <div style="border:1px solid; padding: 5px 10px; margin: 10px 0;">
+    <div style="border: 1px solid; padding: 5px 10px; margin: 10px 0">
       <form action="/">
         Enter OTP here:
         <input type="text" autocomplete="one-time-code" inputmode="numeric" />
       </form>
     </div>
     <div>
-      See the source code and play with it at <a href="https://glitch.com/edit/#!/web-otp">https://glitch.com/edit/#!/web-otp</a>
+      See the source code and play with it at
+      <a href="https://glitch.com/edit/#!/web-otp"
+        >https://glitch.com/edit/#!/web-otp</a
+      >
       <p id="otpp"></p>
     </div>
     <div>
       Learn more at <a href="http://web.dev/web-otp">http://web.dev/web-otp</a>.
     </div>
     <script>
-    if ('OTPCredential' in window) {
-      window.addEventListener('DOMContentLoaded', e => {
-        const input = document.querySelector('input[autocomplete="one-time-code"]');
-        if (!input) return;
-        const ac = new AbortController();
-        const form = input.closest('form');
-        if (form) {
-          form.addEventListener('submit', e => {
-            ac.abort();
-          });
-        }
-        navigator.credentials.get({
-          otp: { transport:['sms'] },
-          signal: ac.signal
-        }).then(otp => {
-          document.querySelector('#otpp').innerHTML = JSON.stringify(otp);
-          input.value = otp.code;
-          if (form) form.submit();
-        }).catch(err => {
-          console.log(err);
+      if ("OTPCredential" in window) {
+        window.addEventListener("DOMContentLoaded", (e) => {
+          const input = document.querySelector(
+            'input[autocomplete="one-time-code"]'
+          );
+          if (!input) return;
+          const ac = new AbortController();
+          const form = input.closest("form");
+          if (form) {
+            form.addEventListener("submit", (e) => {
+              ac.abort();
+            });
+          }
+          navigator.credentials
+            .get({
+              otp: { transport: ["sms"] },
+              signal: ac.signal,
+            })
+            .then((otp) => {
+              window.alert(JSON.stringify(otp));
+              input.value = otp.code;
+              if (form) form.submit();
+            })
+            .catch((err) => {
+              window.alert(err);
+              console.log(err);
+            });
         });
-      });
-    }
+      }
     </script>
   </body>
 </html>
