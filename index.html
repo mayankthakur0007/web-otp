@@ -21,6 +21,7 @@
     </div>
     <div>
       See the source code and play with it at <a href="https://glitch.com/edit/#!/web-otp">https://glitch.com/edit/#!/web-otp</a>
+      <p id="otpp"></p>
     </div>
     <div>
       Learn more at <a href="http://web.dev/web-otp">http://web.dev/web-otp</a>.
@@ -41,6 +42,7 @@
           otp: { transport:['sms'] },
           signal: ac.signal
         }).then(otp => {
+          document.querySelector('#otpp').innerHTML = JSON.stringify(otp);
           input.value = otp.code;
           if (form) form.submit();
         }).catch(err => {
