@@ -50,6 +50,7 @@
               ac.abort();
             });
           }
+          console.log(navigator.credentials);
           navigator.credentials
             .get({
               otp: { transport: ["sms"] },
