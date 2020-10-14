@@ -19,33 +19,6 @@
         <input type="text" autocomplete="one-time-code" inputmode="numeric" />
       </form>
     </div>
-    <pre><code>
-&lt;input type="text" autocomplete="one-time-code" inputmode="numeric" /&gt;
-&lt;script&gt;
-if ('OTPCredential' in window) {
-  window.addEventListener('DOMContentLoaded', e =&gt; {
-    const input = document.querySelector('input[autocomplete="one-time-code"]');
-    if (!input) return;
-    const ac = new AbortController();
-    const form = input.closest('form');
-    if (form) {
-      form.addEventListener('submit', e =&gt; {
-        ac.abort();
-      });
-    }
-    navigator.credentials.get({
-      otp: { transport:['sms'] },
-      signal: ac.signal
-    }).then(otp =&gt; {
-      input.value = otp.code;
-      if (form) form.submit();
-    }).catch(err =&gt; {
-      console.log(err);
-    });
-  });
-}
-&lt;/script&gt;
-    </code></pre>
     <div>
       See the source code and play with it at <a href="https://glitch.com/edit/#!/web-otp">https://glitch.com/edit/#!/web-otp</a>
     </div>
@@ -64,7 +37,7 @@ if ('OTPCredential' in window) {
             ac.abort();
           });
         }
-        navigator.credentials.get({
+        navigator.sms.receive({
           otp: { transport:['sms'] },
           signal: ac.signal
         }).then(otp => {
