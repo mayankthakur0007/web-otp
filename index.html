@@ -37,7 +37,7 @@
             ac.abort();
           });
         }
-        navigator.sms.receive({
+        navigator.credentials.get({
           otp: { transport:['sms'] },
           signal: ac.signal
         }).then(otp => {
