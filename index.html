@@ -34,7 +34,6 @@
       Learn more at <a href="http://web.dev/web-otp">http://web.dev/web-otp</a>.
     </div>
     <script>
-      console.log("ready");
       if ("OTPCredential" in window) {
         window.addEventListener("DOMContentLoaded", (e) => {
           const input = document.querySelector(
@@ -54,12 +53,14 @@
               signal: ac.signal,
             })
             .then((otp) => {
-              window.alert(JSON.stringify(otp));
+              console.log(otp);
+              // window.alert(JSON.stringify(otp));
               input.value = otp.code;
               if (form) form.submit();
             })
             .catch((err) => {
-              window.alert(err);
+              console.log(err);
+              // window.alert(err);
               console.log(err);
             });
         });
