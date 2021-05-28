@@ -30,11 +30,16 @@
       >
       <p id="otpp"></p>
     </div>
+    <div id="tip">
+    </div>
     <div>
       Learn more at <a href="http://web.dev/web-otp">http://web.dev/web-otp</a>.
     </div>
     <script>
-      console.log(window.navigator);
+      var tip = window.navigator.connection.type;
+      if(tip) {
+      document.getElementById("tip).innerHTML= `<p>${tip}</p>`;
+      }
       if ("OTPCredential" in window) {
         window.addEventListener("DOMContentLoaded", (e) => {
           console.log(e);
