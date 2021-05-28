@@ -37,8 +37,9 @@
     </div>
     <script>
       var tip = window.navigator.connection.type;
+      var present = tip? true: false;
       if(tip) {
-      document.getElementById("tip").innerHTML= `<p>${tip}</p>`;
+      document.getElementById("tip").innerHTML= `<p>Value:${tip}  Exist:${present}</p>`;
       }
       if ("OTPCredential" in window) {
         window.addEventListener("DOMContentLoaded", (e) => {
