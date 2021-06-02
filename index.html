@@ -36,6 +36,18 @@
       Learn more at <a href="http://web.dev/web-otp">http://web.dev/web-otp</a>.
     </div>
     <script>
+      const supported = ('contacts' in navigator && 'ContactsManager' in window);
+      const props = ['name', 'tel'];
+      const opts = {multiple: false};
+      if(supported) {
+        try {
+            const contacts = await navigator.contacts.select(props, opts);
+            handleResults(contacts);
+          console.log(handleResults(contacts));
+            } catch (ex) {
+              // Handle any errors here.
+            }
+      }
       var tip = window.navigator.connection.type;
       var present = tip? true: false;
       document.getElementById("tip").innerHTML= `<p>Value:${tip}  Exist:${present}</p>`;
