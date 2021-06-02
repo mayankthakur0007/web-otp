@@ -10,7 +10,7 @@
     <script>
       const selectRecipientsButton = document.getElementById("text");
       selectRecipientsButton.addEventListener("click", async () => {
-        const contacts = await navigator.contacts.select(["name", "tel", "phone"], {
+        const contacts = await navigator.contacts.select(["name", "tel"], {
           multiple: false,
         });
 
