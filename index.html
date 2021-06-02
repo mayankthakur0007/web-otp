@@ -8,7 +8,9 @@
     <h1>Contact Picker</h1>
     <button id="text">Find Contact!!</button>
     <script>
-      const selectRecipientsButton = document.getElementById("text");
+      const supported = ('contacts' in navigator && 'ContactsManager' in window);
+      if(supported) {
+       const selectRecipientsButton = document.getElementById("text");
       selectRecipientsButton.addEventListener("click", async () => {
         const contacts = await navigator.contacts.select(["name", "tel"], {
           multiple: false,
@@ -23,6 +25,7 @@
         // recipients field in the website’s UI.
         console.log(contacts)
       });
+      }
     </script>
   </body>
 </html>
