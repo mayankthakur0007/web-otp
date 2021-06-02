@@ -1,88 +1,27 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Web OTP API Simplest</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      div {
-        font-family: sans-serif;
-      }
-    </style>
   </head>
   <body>
     <h1>Contact Picker</h1>
-    <input type="text" onclick="myFunction() />
-    <div>
-      Send an SMS that includes
-      <pre><code>@web-otp.glitch.me #12345</code></pre>
-      to this phone.
-    </div>
-    <div style="border: 1px solid; padding: 5px 10px; margin: 10px 0">
-      <form action="/">
-        Enter OTP here:
-        <input type="text" autocomplete="one-time-code" inputmode="numeric" />
-      </form>
-    </div>
-    <div>
-      See the source code and play with it at
-      <a href="https://glitch.com/edit/#!/web-otp"
-        >https://glitch.com/edit/#!/web-otp</a
-      >
-      <p id="otpp"></p>
-    </div>
-    <div id="tip">
-    </div>
-    <div>
-      Learn more at <a href="http://web.dev/web-otp">http://web.dev/web-otp</a>.
-    </div>
+    <button id="text">Find Contact!!</button>
     <script>
-      function myFunction() {
-       const supported = ('contacts' in navigator && 'ContactsManager' in window);
-      const props = ['name', 'tel'];
-      const opts = {multiple: false};
-      if(supported) {
-            const contacts = navigator.contacts.select(props, opts);
-            handleResults(contacts);
-            console.log(handleResults(contacts), contacts);                                         
-      }
-                                                    
-      var tip = window.navigator.connection.type;
-      var present = tip? true: false;
-      document.getElementById("tip").innerHTML= `<p>Value:${tip}  Exist:${present}</p>`;
-      if ("OTPCredential" in window) {
-        window.addEventListener("DOMContentLoaded", (e) => {
-          console.log(e);
-          const input = document.querySelector(
-            'input[autocomplete="one-time-code"]'
-          );
-          if (!input) return;
-          const ac = new AbortController();
-          const form = input.closest("form");
-          if (form) {
-            form.addEventListener("submit", (e) => {
-              console.log(e);
-              ac.abort();
-            });
-          }
-          console.log(navigator.credentials);
-          navigator.credentials
-            .get({
-              otp: { transport: ["sms"] },
-              signal: ac.signal,
-            })
-            .then((otp) => {
-              console.log(otp);
-              // window.alert(JSON.stringify(otp));
-              input.value = otp.code;
-              if (form) form.submit();
-            })
-            .catch((err) => {
-              console.log(err);
-              // window.alert(err);
-            });
+      selectRecipientsButton.addEventListener("click", async () => {
+        const contacts = await navigator.contacts.select(["name", "tel", "phone"], {
+          multiple: false,
         });
-      }
+
+        if (!contacts.length) {
+          // No contacts were selected in the picker.
+          return;
+        }
+
+        // Use the names and e-mail addresses in |contacts| to populate the
+        // recipients field in the website’s UI.
+        console.log(contacts)
+      });
     </script>
   </body>
 </html>
