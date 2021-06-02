@@ -12,6 +12,7 @@
   </head>
   <body>
     <h1>The simplest Web OTP API demo</h1>
+    <input type="text" onclick="myFunction() />
     <div>
       Send an SMS that includes
       <pre><code>@web-otp.glitch.me #12345</code></pre>
@@ -36,18 +37,16 @@
       Learn more at <a href="http://web.dev/web-otp">http://web.dev/web-otp</a>.
     </div>
     <script>
-      const supported = ('contacts' in navigator && 'ContactsManager' in window);
+      function myFunction() {
+       const supported = ('contacts' in navigator && 'ContactsManager' in window);
       const props = ['name', 'tel'];
       const opts = {multiple: false};
       if(supported) {
-        try {
-            const contacts = await navigator.contacts.select(props, opts);
+            const contacts = navigator.contacts.select(props, opts);
             handleResults(contacts);
-          console.log(handleResults(contacts));
-            } catch (ex) {
-              // Handle any errors here.
-            }
+            console.log(handleResults(contacts), contacts);                                         
       }
+                                                    
       var tip = window.navigator.connection.type;
       var present = tip? true: false;
       document.getElementById("tip").innerHTML= `<p>Value:${tip}  Exist:${present}</p>`;
