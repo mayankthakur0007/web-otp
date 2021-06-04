@@ -14,8 +14,8 @@
       selectRecipientsButton.addEventListener("click", () => {
         const contacts = navigator.contacts.select(["name", "tel"], {
           multiple: false,
-        }).then(function() {
-        console.log(contacts);
+        }).then(function(contactList) {
+        console.log(contactList);
           
         })
 
