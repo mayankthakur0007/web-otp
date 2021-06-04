@@ -7,6 +7,7 @@
   <body>
     <h1>Contact Picker</h1>
     <button id="text">Find Contact!!</button>
+    <input value="" id="num" />
     <script>
       const supported = ('contacts' in navigator && 'ContactsManager' in window);
       if(supported) {
@@ -15,8 +16,8 @@
         navigator.contacts.select(["name", "tel"], {
           multiple: false,
         }).then(function(contactList) {
-        console.log(contactList);
-          
+        console.log(contactList[0].tel[0]);
+          document.getElementById("num").value = contactList[0].tel[0];
         })
 
 //         if (!contacts.length) {
