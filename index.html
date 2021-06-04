@@ -11,8 +11,8 @@
       const supported = ('contacts' in navigator && 'ContactsManager' in window);
       if(supported) {
        const selectRecipientsButton = document.getElementById("text");
-      selectRecipientsButton.addEventListener("click", async () => {
-        const contacts = await navigator.contacts.select(["name", "tel"], {
+      selectRecipientsButton.addEventListener("click", () => {
+        const contacts = navigator.contacts.select(["name", "tel"], {
           multiple: false,
         });
 
