@@ -13,7 +13,7 @@
       if(supported) {
        const selectRecipientsButton = document.getElementById("text");
       selectRecipientsButton.addEventListener("click", () => {
-        navigator.contacts.select(["name", "tel"], {
+        navigator.contacts.select(["tel"], {
           multiple: false,
         }).then(function(contactList) {
         console.log(contactList[0].tel[0]);
